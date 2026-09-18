@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FHL 2026 · Accessibility Tree Snapshot & Diff</title>
+<style>
+:root{--navy:#071A2B;--blue:#0078D4;--cyan:#00B7C3;--red:#D13438;--green:#107C10;--ink:#172033;--muted:#5E6A7D;--pale:#EEF6FC;--panel:#F7F9FC;--line:#D9E2EC}
+*{box-sizing:border-box}body{margin:0;background:#020b13;color:var(--ink);font-family:"Segoe UI",Arial,sans-serif;overflow:hidden}
+.slide{display:none;position:absolute;inset:0;width:100vw;height:100vh;background:#fff;padding:4.5vh 5vw 5vh 6vw}.slide.active{display:block}.accent{position:absolute;left:0;top:0;bottom:0;width:.8vw;background:var(--cyan)}
+header span{color:var(--blue);text-transform:uppercase;font-weight:800;letter-spacing:.16em;font-size:1.35vw}h1{font-size:3.15vw;line-height:1.08;margin:.7vh 0 1vh;color:var(--navy)}header p{font-size:1.55vw;color:var(--muted);margin:0;max-width:85vw}
+main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bottom:2.2vh;color:#7C8798;font-size:.82vw}footer b{float:right;color:var(--blue)}
+.hero,.closing-slide{background:radial-gradient(circle at 85% 15%,#0c5d78 0,transparent 27%),linear-gradient(120deg,#071A2B,#004E8C);color:#fff}.hero .accent,.closing-slide .accent{display:none}.hero header span,.closing-slide header span{color:var(--cyan)}.hero h1,.closing-slide h1{color:#fff;font-size:5.3vw;margin-top:6vh}.hero header p,.closing-slide header p{color:#c7e6fb;font-size:2.1vw}.hero-chip{display:inline-block;background:var(--blue);padding:1.5vh 2.2vw;border-radius:1vw;font-weight:800;font-size:1.5vw;margin-top:6vh}.hero-note{color:#a8bdd0;font-size:1.25vw;margin-top:4vh}
+.compare{display:grid;grid-template-columns:1fr 12vw 1fr;align-items:center;gap:2vw}.compare figure,.evidence figure{margin:0;position:relative}.compare img{width:100%;border-radius:1vw;box-shadow:0 1.2vh 3vh #071a2b33}.tag{position:absolute;left:1vw;top:1vw;color:#fff;padding:.7vh 1vw;border-radius:2vw;font-weight:800;font-size:1vw}.tag.good{background:var(--green)}.tag.bad{background:var(--red)}figcaption{text-align:center;font-size:1.15vw;font-weight:700;margin-top:1vh}.same{text-align:center;background:var(--navy);color:#fff;border-radius:1vw;padding:2vh 1vw;font-size:1.45vw;font-weight:800}
+.wide-graphic{width:100%;height:58vh;object-fit:contain}.callout{background:var(--pale);border:1px solid #b8ddf7;color:var(--blue);font-weight:800;text-align:center;padding:1.2vh;border-radius:.7vw;font-size:1.15vw}.callout.dark{background:var(--navy);color:#fff;border:0}
+.commands{display:grid;gap:2.4vh}.commands>div{display:grid;grid-template-columns:15vw 1fr;align-items:center}.commands b{font-size:1.45vw}.commands code,.repo code{background:var(--navy);color:#dceeff;padding:2vh 1.7vw;border-radius:.7vw;font:1.15vw Consolas,monospace}.center-accent{text-align:center;color:var(--red);font-weight:800;font-size:1.45vw;margin-top:3vh}
+.grid{display:grid;gap:1.4vw}.grid.six{grid-template-columns:repeat(3,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid article{background:var(--panel);border:1px solid var(--line);border-left:.45vw solid var(--blue);border-radius:.8vw;padding:2.2vh 1.5vw;min-height:15vh}.grid article h3{font-size:1.35vw;margin:0 0 1vh}.grid article p{font-size:1.05vw;color:var(--muted);margin:0;line-height:1.35}.technical article{min-height:14vh}.metric-strip{margin-top:2.5vh;text-align:center;font-size:1.4vw;font-weight:800;color:var(--navy)}
+.video-wrap{text-align:center}.video-wrap video{height:57vh;max-width:83vw;border-radius:1vw;box-shadow:0 1.2vh 3vh #071a2b44;background:#000}.video-link{display:block;margin-top:1.6vh;color:var(--blue);font-size:1.15vw;font-weight:700}
+.evidence{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5vw}.evidence img{width:100%;height:39vh;object-fit:contain;border:1px solid var(--line);border-radius:.8vw;background:#f5f8fb}.terminal{margin-top:2.8vh;background:var(--navy);color:#fff;border-radius:.7vw;padding:1.6vh;text-align:center;font:1.15vw Consolas,monospace}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5vw;margin-bottom:3vh}.metrics article{background:var(--pale);border:1px solid #b8ddf7;border-radius:1vw;text-align:center;padding:2vh}.metrics article.red{background:#fff1f1;border-color:#f3b2b4}.metrics strong{display:block;font-size:3.9vw;color:var(--blue)}.metrics .red strong{color:var(--red)}.metrics span{font-size:1.1vw;font-weight:700}
+.impact{display:grid;grid-template-columns:1fr 8vw 1fr;gap:2vw;align-items:center}.impact section{background:#fff5f5;border:1px solid #f3b2b4;border-radius:1vw;padding:2vh 2vw}.impact .after{background:#f1fbf1;border-color:#a7d8a7}.impact h3{font-size:1.5vw;margin:0;color:var(--red)}.impact .after h3{color:var(--green)}.impact li{font-size:1.2vw;margin:2.3vh 0}.impact .arrow{font-size:5vw;text-align:center;color:var(--cyan)}
+.repo{display:grid;grid-template-columns:1fr 18vw;gap:3vw}.repo>div{background:var(--navy);border-radius:1vw;padding:3vh 2.2vw}.repo span{display:block;color:var(--cyan);font-size:1vw;text-transform:uppercase;font-weight:800;margin:1vh 0}.repo code{display:block;margin-bottom:2.6vh}.repo aside{text-align:center}.repo aside img{width:13vw}.repo aside a{display:block;color:var(--blue);font-weight:800;font-size:1.1vw}
+.closing-slide h1{text-align:center;font-size:3.7vw;margin-top:5vh}.closing-slide header p{text-align:center;max-width:none;font-size:2vw}.closing{text-align:center;color:var(--cyan);font-size:3vw;font-weight:900;margin-top:11vh}.downloads{display:flex;justify-content:center;gap:1.5vw;margin-top:8vh}.downloads a{background:var(--blue);color:#fff;padding:1.5vh 1.4vw;border-radius:.7vw;text-decoration:none;font-weight:800;font-size:1.1vw}
+.controls{position:fixed;right:1.3vw;bottom:1.1vh;z-index:10;display:flex;gap:.6vw}.controls button{border:0;background:#071a2bcc;color:#fff;border-radius:50%;width:2.5vw;height:2.5vw;font-size:1.2vw;cursor:pointer}.progress{position:fixed;left:0;bottom:0;height:.45vh;background:var(--cyan);z-index:20;transition:width .2s}
+@media(max-width:900px){h1{font-size:4.5vw}header p{font-size:2.2vw}.grid article p{font-size:1.5vw}}
+</style></head><body>
+<section class="slide hero" data-index="0">
+        <div class="accent"></div>
+        <header><span>FHL 2026 Project Showcase</span><h1>Catch the invisible<br/>before it ships.</h1><p>Accessibility Tree Snapshot & Diff for React Native Windows</p></header>
+        <main><div class="hero-chip">Real Gallery · Real UIA · Real regression</div>
+        <p class="hero-note">Built end-to-end during FHL: implementation, tests, hardening, live validation, and demo.</p></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>01</b></footer>
+      </section>
+<section class="slide " data-index="1">
+        <div class="accent"></div>
+        <header><span>The problem</span><h1>Accessibility regressions are often invisible.</h1><p>A UI can look pixel-perfect while becoming unusable to keyboard and screen-reader users.</p></header>
+        <main><div class="compare">
+        <figure><span class="tag good">Healthy build</span><img src="assets/gallery-healthy-annotated.png"/><figcaption>Item 3 is keyboard focusable.</figcaption></figure>
+        <div class="same">They look<br/>the same.</div>
+        <figure><span class="tag bad">Broken build</span><img src="assets/gallery-broken-annotated.png"/><figcaption>Item 3 silently loses focusability.</figcaption></figure>
+      </div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>02</b></footer>
+      </section>
+<section class="slide " data-index="2">
+        <div class="accent"></div>
+        <header><span>The FHL project</span><h1>A before-and-after detector for what assistive technology sees.</h1><p>Capture two UI Automation trees, compare them deterministically, and fail when semantics regress.</p></header>
+        <main><img class="wide-graphic" src="assets/architecture.png"/>
+        <div class="callout">Read-only external tool · No app instrumentation · No RNW runtime changes</div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>03</b></footer>
+      </section>
+<section class="slide " data-index="3">
+        <div class="accent"></div>
+        <header><span>How engineers use it</span><h1>Three commands turn an assumption into evidence.</h1><p>Run locally, during code review, or as a CI quality gate.</p></header>
+        <main><div class="commands">
+        <div><b>1 · Capture before</b><code>rnw-a11y capture --process RNTesterApp-Fabric --output before.json</code></div>
+        <div><b>2 · Capture after</b><code>rnw-a11y capture --process RNTesterApp-Fabric --output after.json</code></div>
+        <div><b>3 · Compare and gate</b><code>rnw-a11y diff before.json after.json --fail-on potential-regression</code></div>
+      </div><p class="center-accent">Exit code 1 makes the result actionable.</p></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>04</b></footer>
+      </section>
+<section class="slide " data-index="4">
+        <div class="accent"></div>
+        <header><span>Where it helps</span><h1>Find high-risk accessibility issues earlier.</h1><p>Especially when visual review is not enough.</p></header>
+        <main><div class="grid six">
+        <article><h3>Fabric migrations</h3><p>Verify semantic parity across architecture changes.</p></article>
+        <article><h3>Native refactors</h3><p>Catch changed controls, roles, providers, and hierarchy.</p></article>
+        <article><h3>Accessibility fixes</h3><p>Prove the fix without introducing collateral regressions.</p></article>
+        <article><h3>Dependency upgrades</h3><p>Compare RNW, React Native, and Windows SDK versions.</p></article>
+        <article><h3>Release validation</h3><p>Create repeatable semantic evidence across branches.</p></article>
+        <article><h3>PR quality gates</h3><p>Block lost names, controls, and keyboard focusability.</p></article>
+      </div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>05</b></footer>
+      </section>
+<section class="slide " data-index="5">
+        <div class="accent"></div>
+        <header><span>Technical depth</span><h1>Designed for trustworthy diffs—not just tree dumps.</h1><p>Hardened through repeated bug-focused review and live Windows validation.</p></header>
+        <main><div class="grid six technical">
+        <article><h3>Bounded capture</h3><p>Incremental TreeWalker traversal enforces limits before expansion.</p></article>
+        <article><h3>Stable matching</h3><p>Sibling-scoped identities and bounded sequence alignment avoid cascade noise.</p></article>
+        <article><h3>Failure safety</h3><p>Incomplete captures are explicit and rejected by default.</p></article>
+        <article><h3>Privacy by design</h3><p>No text values, runtime IDs, exact bounds, or volatile focus state.</p></article>
+        <article><h3>Deterministic schema</h3><p>Versioned JSON, validation, and stable ordering.</p></article>
+        <article><h3>Hardened output</h3><p>Strict parsing and sanitized terminal/Markdown content.</p></article>
+      </div><div class="metric-strip">15 tests · 0 warnings · live capture/diff · 0 RNW runtime files changed</div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>06</b></footer>
+      </section>
+<section class="slide " data-index="6">
+        <div class="accent"></div>
+        <header><span>Working demo</span><h1>A real regression in the React Native Gallery.</h1><p>The embedded video uses the actual healthy and broken Gallery states and the real tool output.</p></header>
+        <main><div class="video-wrap"><video src="demo.mp4" controls poster="assets/regression-report.png"></video>
+        <a class="video-link" href="demo.mp4" target="_blank">Open the standalone demo video ↗</a></div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>07</b></footer>
+      </section>
+<section class="slide " data-index="7">
+        <div class="accent"></div>
+        <header><span>Demo evidence</span><h1>The screenshot stays the same. The semantics do not.</h1><p>One shared renderer caused five invisible keyboard regressions.</p></header>
+        <main><div class="evidence">
+        <figure><img src="assets/gallery-healthy-annotated.png"/><figcaption>1 · Healthy baseline</figcaption></figure>
+        <figure><img src="assets/gallery-broken-annotated.png"/><figcaption>2 · Visually identical regression</figcaption></figure>
+        <figure><img src="assets/regression-report.png"/><figcaption>3 · Five issues caught</figcaption></figure>
+      </div><div class="terminal">isKeyboardFocusable&nbsp; true → false &nbsp;·&nbsp; PotentialRegression &nbsp;·&nbsp; exit code 1</div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>08</b></footer>
+      </section>
+<section class="slide " data-index="8">
+        <div class="accent"></div>
+        <header><span>Measured outcome</span><h1>From FHL idea to release-ready implementation.</h1><p>The complete capture, diff, reporting, and gate workflow works today.</p></header>
+        <main><div class="metrics">
+        <article><strong>15</strong><span>automated tests</span></article>
+        <article><strong>0</strong><span>build warnings</span></article>
+        <article class="red"><strong>5</strong><span>Gallery regressions caught</span></article>
+        <article><strong>1</strong><span>CI-ready failing exit code</span></article>
+      </div>
+      <div class="grid three">
+        <article><h3>Low risk</h3><p>Standalone and read-only.</p></article>
+        <article><h3>Immediately useful</h3><p>Gallery, RNTester, Playground, and desktop apps.</p></article>
+        <article><h3>Built to extend</h3><p>Reusable foundation for focus diagnostics.</p></article>
+      </div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>09</b></footer>
+      </section>
+<section class="slide " data-index="9">
+        <div class="accent"></div>
+        <header><span>Overall impact</span><h1>Shift accessibility into normal engineering review.</h1><p>The goal is fewer surprises when manual keyboard and Narrator validation runs.</p></header>
+        <main><div class="impact">
+        <section><h3>Today</h3><ol><li>Visual review passes</li><li>Manual test happens late</li><li>Regression becomes a bug</li><li>Engineer reconstructs the cause</li></ol></section>
+        <div class="arrow">→</div>
+        <section class="after"><h3>With this project</h3><ol><li>Capture baseline with the PR</li><li>Diff exposes semantic change</li><li>CI blocks risky regression</li><li>Reviewer gets exact evidence</li></ol></section>
+      </div><div class="callout dark">Faster diagnosis · stronger PR evidence · safer framework evolution · fewer customer-found regressions</div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>10</b></footer>
+      </section>
+<section class="slide " data-index="10">
+        <div class="accent"></div>
+        <header><span>Where to find it</span><h1>Assuming merge: part of the RNW developer toolchain.</h1><p>The implementation branch is available today.</p></header>
+        <main><div class="repo">
+        <div><span>Repository path</span><code>packages/@rnw-scripts/accessibility-diagnostics</code>
+        <span>Run it</span><code>yarn workspace @rnw-scripts/accessibility-diagnostics rnw-a11y …</code>
+        <span>FHL implementation</span><code>fhl/accessibility-tree-diff · 6909efe740</code></div>
+        <aside><img src="assets/source-qr.png"/><a href="https://github.com/anuagragith/react-native-windows/tree/fhl/accessibility-tree-diff/packages/%40rnw-scripts/accessibility-diagnostics" target="_blank">Open source branch ↗</a></aside>
+      </div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>11</b></footer>
+      </section>
+<section class="slide " data-index="11">
+        <div class="accent"></div>
+        <header><span>Potential extensions</span><h1>The snapshot engine is the foundation, not the finish line.</h1><p>Every extension reuses the same selector, UIA reader, model, serializer, and reporters.</p></header>
+        <main><div class="grid six">
+        <article><h3>Focus Path Recorder</h3><p>Flag loops, jumps, unnamed targets, and offscreen focus.</p></article>
+        <article><h3>PR automation</h3><p>Post accessibility diffs automatically on each change.</p></article>
+        <article><h3>Baseline catalog</h3><p>Approved component snapshots across release branches.</p></article>
+        <article><h3>Interactive explorer</h3><p>Visual before/after drill-down and filters.</p></article>
+        <article><h3>Rule plug-ins</h3><p>Component-specific semantic policies.</p></article>
+        <article><h3>Cross-build matrix</h3><p>Compare architectures, versions, branches, and Windows releases.</p></article>
+      </div><p class="center-accent">Next milestone: a repeatable RNW CI scenario.</p></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>12</b></footer>
+      </section>
+<section class="slide closing-slide" data-index="12">
+        <div class="accent"></div>
+        <header><span>Closing</span><h1>Accessibility should not depend on someone noticing what cannot be seen.</h1><p>Capture. Compare. Catch. Block.</p></header>
+        <main><div class="closing">Shift accessibility left.</div>
+        <div class="downloads"><a href="FHL-Accessibility-Tree-Diff.pptx">Download PowerPoint</a><a href="demo.mp4">Open demo video</a><a href="https://github.com/anuagragith/react-native-windows/tree/fhl/accessibility-tree-diff/packages/%40rnw-scripts/accessibility-diagnostics" target="_blank">View the implementation</a></div></main>
+        <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>13</b></footer>
+      </section>
+<div class="controls"><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div><div class="progress"></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let index=0;
+function show(n){index=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('active',i===index));document.querySelector('.progress').style.width=((index+1)/slides.length*100)+'%';history.replaceState(null,'','#'+(index+1));}
+document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))show(index+1);if(['ArrowLeft','PageUp'].includes(e.key))show(index-1);if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});
+show(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
+</script></body></html>
