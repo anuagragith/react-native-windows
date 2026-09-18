@@ -18,7 +18,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
 .impact{display:grid;grid-template-columns:1fr 8vw 1fr;gap:2vw;align-items:center}.impact section{background:#fff5f5;border:1px solid #f3b2b4;border-radius:1vw;padding:2vh 2vw}.impact .after{background:#f1fbf1;border-color:#a7d8a7}.impact h3{font-size:1.5vw;margin:0;color:var(--red)}.impact .after h3{color:var(--green)}.impact li{font-size:1.2vw;margin:2.3vh 0}.impact .arrow{font-size:5vw;text-align:center;color:var(--cyan)}
 .repo{display:grid;grid-template-columns:1fr 18vw;gap:3vw}.repo>div{background:var(--navy);border-radius:1vw;padding:3vh 2.2vw}.repo span{display:block;color:var(--cyan);font-size:1vw;text-transform:uppercase;font-weight:800;margin:1vh 0}.repo code{display:block;margin-bottom:2.6vh}.repo aside{text-align:center}.repo aside img{width:13vw}.repo aside a{display:block;color:var(--blue);font-weight:800;font-size:1.1vw}
 .closing-slide h1{text-align:center;font-size:3.7vw;margin-top:5vh}.closing-slide header p{text-align:center;max-width:none;font-size:2vw}.closing{text-align:center;color:var(--cyan);font-size:3vw;font-weight:900;margin-top:11vh}.downloads{display:flex;justify-content:center;gap:1.5vw;margin-top:8vh}.downloads a{background:var(--blue);color:#fff;padding:1.5vh 1.4vw;border-radius:.7vw;text-decoration:none;font-weight:800;font-size:1.1vw}
-.controls{position:fixed;right:1.3vw;bottom:1.1vh;z-index:10;display:flex;gap:.6vw}.controls button{border:0;background:#071a2bcc;color:#fff;border-radius:50%;width:2.5vw;height:2.5vw;font-size:1.2vw;cursor:pointer}.progress{position:fixed;left:0;bottom:0;height:.45vh;background:var(--cyan);z-index:20;transition:width .2s}
+.controls{position:fixed;right:1.3vw;bottom:1.1vh;z-index:10;display:flex;gap:.6vw}.controls button{border:0;background:#071a2bcc;color:#fff;border-radius:50%;min-width:2.5vw;height:2.5vw;padding:0 .7vw;font-size:1.05vw;cursor:pointer}.controls #narrate{border-radius:1.4vw;font-weight:800}.controls #narrate.on{background:var(--green)}.progress{position:fixed;left:0;bottom:0;height:.45vh;background:var(--cyan);z-index:20;transition:width .2s}
 @media(max-width:900px){h1{font-size:4.5vw}header p{font-size:2.2vw}.grid article p{font-size:1.5vw}}
 </style></head><body>
 <section class="slide hero" data-index="0">
@@ -26,6 +26,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <header><span>FHL 2026 Project Showcase</span><h1>Catch the invisible<br/>before it ships.</h1><p>Accessibility Tree Snapshot & Diff for React Native Windows</p></header>
         <main><div class="hero-chip">Real Gallery · Real UIA · Real regression</div>
         <p class="hero-note">Built end-to-end during FHL: implementation, tests, hardening, live validation, and demo.</p></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/01.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>01</b></footer>
       </section>
 <section class="slide " data-index="1">
@@ -36,6 +37,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <div class="same">They look<br/>the same.</div>
         <figure><span class="tag bad">Broken build</span><img src="assets/gallery-broken-annotated.png"/><figcaption>Item 3 silently loses focusability.</figcaption></figure>
       </div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/02.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>02</b></footer>
       </section>
 <section class="slide " data-index="2">
@@ -43,6 +45,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <header><span>The FHL project</span><h1>A before-and-after detector for what assistive technology sees.</h1><p>Capture two UI Automation trees, compare them deterministically, and fail when semantics regress.</p></header>
         <main><img class="wide-graphic" src="assets/architecture.png"/>
         <div class="callout">Read-only external tool · No app instrumentation · No RNW runtime changes</div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/03.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>03</b></footer>
       </section>
 <section class="slide " data-index="3">
@@ -53,6 +56,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <div><b>2 · Capture after</b><code>rnw-a11y capture --process RNTesterApp-Fabric --output after.json</code></div>
         <div><b>3 · Compare and gate</b><code>rnw-a11y diff before.json after.json --fail-on potential-regression</code></div>
       </div><p class="center-accent">Exit code 1 makes the result actionable.</p></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/04.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>04</b></footer>
       </section>
 <section class="slide " data-index="4">
@@ -66,6 +70,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <article><h3>Release validation</h3><p>Create repeatable semantic evidence across branches.</p></article>
         <article><h3>PR quality gates</h3><p>Block lost names, controls, and keyboard focusability.</p></article>
       </div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/05.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>05</b></footer>
       </section>
 <section class="slide " data-index="5">
@@ -79,6 +84,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <article><h3>Deterministic schema</h3><p>Versioned JSON, validation, and stable ordering.</p></article>
         <article><h3>Hardened output</h3><p>Strict parsing and sanitized terminal/Markdown content.</p></article>
       </div><div class="metric-strip">15 tests · 0 warnings · live capture/diff · 0 RNW runtime files changed</div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/06.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>06</b></footer>
       </section>
 <section class="slide " data-index="6">
@@ -86,6 +92,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <header><span>Working demo</span><h1>A real regression in the React Native Gallery.</h1><p>The embedded video uses the actual healthy and broken Gallery states and the real tool output.</p></header>
         <main><div class="video-wrap"><video src="demo.mp4" controls poster="assets/regression-report.png"></video>
         <a class="video-link" href="demo.mp4" target="_blank">Open the standalone demo video ↗</a></div></main>
+        
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>07</b></footer>
       </section>
 <section class="slide " data-index="7">
@@ -96,6 +103,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <figure><img src="assets/gallery-broken-annotated.png"/><figcaption>2 · Visually identical regression</figcaption></figure>
         <figure><img src="assets/regression-report.png"/><figcaption>3 · Five issues caught</figcaption></figure>
       </div><div class="terminal">isKeyboardFocusable&nbsp; true → false &nbsp;·&nbsp; PotentialRegression &nbsp;·&nbsp; exit code 1</div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/08.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>08</b></footer>
       </section>
 <section class="slide " data-index="8">
@@ -112,6 +120,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <article><h3>Immediately useful</h3><p>Gallery, RNTester, Playground, and desktop apps.</p></article>
         <article><h3>Built to extend</h3><p>Reusable foundation for focus diagnostics.</p></article>
       </div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/09.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>09</b></footer>
       </section>
 <section class="slide " data-index="9">
@@ -122,6 +131,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <div class="arrow">→</div>
         <section class="after"><h3>With this project</h3><ol><li>Capture baseline with the PR</li><li>Diff exposes semantic change</li><li>CI blocks risky regression</li><li>Reviewer gets exact evidence</li></ol></section>
       </div><div class="callout dark">Faster diagnosis · stronger PR evidence · safer framework evolution · fewer customer-found regressions</div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/10.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>10</b></footer>
       </section>
 <section class="slide " data-index="10">
@@ -133,6 +143,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <span>FHL implementation</span><code>fhl/accessibility-tree-diff · 6909efe740</code></div>
         <aside><img src="assets/source-qr.png"/><a href="https://github.com/anuagragith/react-native-windows/tree/fhl/accessibility-tree-diff/packages/%40rnw-scripts/accessibility-diagnostics" target="_blank">Open source branch ↗</a></aside>
       </div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/11.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>11</b></footer>
       </section>
 <section class="slide " data-index="11">
@@ -146,6 +157,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <article><h3>Rule plug-ins</h3><p>Component-specific semantic policies.</p></article>
         <article><h3>Cross-build matrix</h3><p>Compare architectures, versions, branches, and Windows releases.</p></article>
       </div><p class="center-accent">Next milestone: a repeatable RNW CI scenario.</p></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/12.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>12</b></footer>
       </section>
 <section class="slide closing-slide" data-index="12">
@@ -153,13 +165,26 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
         <header><span>Closing</span><h1>Accessibility should not depend on someone noticing what cannot be seen.</h1><p>Capture. Compare. Catch. Block.</p></header>
         <main><div class="closing">Shift accessibility left.</div>
         <div class="downloads"><a href="FHL-Accessibility-Tree-Diff.pptx">Download PowerPoint</a><a href="demo.mp4">Open demo video</a><a href="https://github.com/anuagragith/react-native-windows/tree/fhl/accessibility-tree-diff/packages/%40rnw-scripts/accessibility-diagnostics" target="_blank">View the implementation</a></div></main>
+        <audio class="slide-narration" preload="metadata" src="assets/narration/13.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>13</b></footer>
       </section>
-<div class="controls"><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div><div class="progress"></div>
+<div class="controls"><button id="narrate" aria-label="Start narrated presentation">▶ Narrate</button><button id="prev" aria-label="Previous slide">‹</button><button id="next" aria-label="Next slide">›</button></div><div class="progress"></div>
 <script>
-const slides=[...document.querySelectorAll('.slide')];let index=0;
-function show(n){index=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('active',i===index));document.querySelector('.progress').style.width=((index+1)/slides.length*100)+'%';history.replaceState(null,'','#'+(index+1));}
+const slides=[...document.querySelectorAll('.slide')];let index=0;let narrationMode=false;
+const narrateButton=document.getElementById('narrate');
+function stopMedia(){document.querySelectorAll('audio,video').forEach(media=>{media.pause();media.currentTime=0;});}
+async function playCurrent(){
+  if(!narrationMode)return;
+  const slide=slides[index];
+  const media=slide.querySelector('.slide-narration')||slide.querySelector('video');
+  if(!media){show(index+1);return;}
+  if(media.tagName==='VIDEO')media.muted=false;
+  media.onended=()=>{if(narrationMode&&index<slides.length-1)show(index+1);else if(index===slides.length-1){narrationMode=false;narrateButton.classList.remove('on');narrateButton.textContent='▶ Narrate';}};
+  try{await media.play();}catch{narrationMode=false;narrateButton.classList.remove('on');narrateButton.textContent='▶ Narrate';}
+}
+function show(n){stopMedia();index=(n+slides.length)%slides.length;slides.forEach((s,i)=>s.classList.toggle('active',i===index));document.querySelector('.progress').style.width=((index+1)/slides.length*100)+'%';history.replaceState(null,'','#'+(index+1));playCurrent();}
 document.getElementById('prev').onclick=()=>show(index-1);document.getElementById('next').onclick=()=>show(index+1);
+narrateButton.onclick=()=>{narrationMode=!narrationMode;narrateButton.classList.toggle('on',narrationMode);narrateButton.textContent=narrationMode?'■ Stop':'▶ Narrate';if(narrationMode)playCurrent();else stopMedia();};
 addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))show(index+1);if(['ArrowLeft','PageUp'].includes(e.key))show(index-1);if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1);});
 show(Math.max(0,(parseInt(location.hash.slice(1))||1)-1));
 </script></body></html>
