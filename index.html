@@ -11,7 +11,7 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
 .compare{display:grid;grid-template-columns:1fr 12vw 1fr;align-items:center;gap:2vw}.compare figure,.evidence figure{margin:0;position:relative}.compare img{width:100%;border-radius:1vw;box-shadow:0 1.2vh 3vh #071a2b33}.tag{position:absolute;left:1vw;top:1vw;color:#fff;padding:.7vh 1vw;border-radius:2vw;font-weight:800;font-size:1vw}.tag.good{background:var(--green)}.tag.bad{background:var(--red)}figcaption{text-align:center;font-size:1.15vw;font-weight:700;margin-top:1vh}.same{text-align:center;background:var(--navy);color:#fff;border-radius:1vw;padding:2vh 1vw;font-size:1.45vw;font-weight:800}
 .wide-graphic{width:100%;height:58vh;object-fit:contain}.callout{background:var(--pale);border:1px solid #b8ddf7;color:var(--blue);font-weight:800;text-align:center;padding:1.2vh;border-radius:.7vw;font-size:1.15vw}.callout.dark{background:var(--navy);color:#fff;border:0}
 .commands{display:grid;gap:2.4vh}.commands>div{display:grid;grid-template-columns:15vw 1fr;align-items:center}.commands b{font-size:1.45vw}.commands code,.repo code{background:var(--navy);color:#dceeff;padding:2vh 1.7vw;border-radius:.7vw;font:1.15vw Consolas,monospace}.center-accent{text-align:center;color:var(--red);font-weight:800;font-size:1.45vw;margin-top:3vh}
-.grid{display:grid;gap:1.4vw}.grid.six{grid-template-columns:repeat(3,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid article{background:var(--panel);border:1px solid var(--line);border-left:.45vw solid var(--blue);border-radius:.8vw;padding:2.2vh 1.5vw;min-height:15vh}.grid article h3{font-size:1.35vw;margin:0 0 1vh}.grid article p{font-size:1.05vw;color:var(--muted);margin:0;line-height:1.35}.technical article{min-height:14vh}.metric-strip{margin-top:2.5vh;text-align:center;font-size:1.4vw;font-weight:800;color:var(--navy)}
+.grid{display:grid;gap:1.4vw}.grid.six{grid-template-columns:repeat(3,1fr)}.grid.four{grid-template-columns:repeat(2,1fr)}.grid.three{grid-template-columns:repeat(3,1fr)}.grid article{background:var(--panel);border:1px solid var(--line);border-left:.45vw solid var(--blue);border-radius:.8vw;padding:2.2vh 1.5vw;min-height:15vh}.grid article h3{font-size:1.35vw;margin:0 0 1vh}.grid article p{font-size:1.05vw;color:var(--muted);margin:0;line-height:1.35}.technical article{min-height:17vh}.next-steps article{min-height:34vh;padding:3.2vh 2vw}.next-steps article h3{font-size:1.55vw}.next-steps article p{font-size:1.15vw;line-height:1.5}.metric-strip{margin-top:2.5vh;text-align:center;font-size:1.4vw;font-weight:800;color:var(--navy)}
 .video-wrap{text-align:center}.video-wrap video{height:57vh;max-width:83vw;border-radius:1vw;box-shadow:0 1.2vh 3vh #071a2b44;background:#000}.video-link{display:block;margin-top:1.6vh;color:var(--blue);font-size:1.15vw;font-weight:700}
 .evidence{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5vw}.evidence img{width:100%;height:39vh;object-fit:contain;border:1px solid var(--line);border-radius:.8vw;background:#f5f8fb}.terminal{margin-top:2.8vh;background:var(--navy);color:#fff;border-radius:.7vw;padding:1.6vh;text-align:center;font:1.15vw Consolas,monospace}
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5vw;margin-bottom:3vh}.metrics article{background:var(--pale);border:1px solid #b8ddf7;border-radius:1vw;text-align:center;padding:2vh}.metrics article.red{background:#fff1f1;border-color:#f3b2b4}.metrics strong{display:block;font-size:3.9vw;color:var(--blue)}.metrics .red strong{color:var(--red)}.metrics span{font-size:1.1vw;font-weight:700}
@@ -76,13 +76,11 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
 <section class="slide " data-index="5">
         <div class="accent"></div>
         <header><span>Technical depth</span><h1>Designed for trustworthy diffs—not just tree dumps.</h1><p>Hardened through repeated bug-focused review and live Windows validation.</p></header>
-        <main><div class="grid six technical">
-        <article><h3>Bounded capture</h3><p>Incremental TreeWalker traversal enforces limits before expansion.</p></article>
-        <article><h3>Stable matching</h3><p>Sibling-scoped identities and bounded sequence alignment avoid cascade noise.</p></article>
-        <article><h3>Failure safety</h3><p>Incomplete captures are explicit and rejected by default.</p></article>
-        <article><h3>Privacy by design</h3><p>No text values, runtime IDs, exact bounds, or volatile focus state.</p></article>
-        <article><h3>Deterministic schema</h3><p>Versioned JSON, validation, and stable ordering.</p></article>
-        <article><h3>Hardened output</h3><p>Strict parsing and sanitized terminal/Markdown content.</p></article>
+        <main><div class="grid four technical">
+        <article><h3>Safe on large applications</h3><p>Stops at configured limits before requesting more of the accessibility tree.</p></article>
+        <article><h3>Accurate comparisons</h3><p>Matches elements within the same parent to avoid cascades of false changes.</p></article>
+        <article><h3>Honest about failures</h3><p>Marks interrupted captures as incomplete instead of reporting a misleading clean result.</p></article>
+        <article><h3>Protects application data</h3><p>Excludes sensitive values and sanitizes application-controlled report text.</p></article>
       </div><div class="metric-strip">15 tests · 0 warnings · live capture/diff · 0 RNW runtime files changed</div></main>
         <audio class="slide-narration" preload="metadata" src="assets/narration/06.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>06</b></footer>
@@ -148,15 +146,12 @@ main{height:72vh;margin-top:3vh}footer{position:absolute;left:6vw;right:4vw;bott
       </section>
 <section class="slide " data-index="11">
         <div class="accent"></div>
-        <header><span>Potential extensions</span><h1>The snapshot engine is the foundation, not the finish line.</h1><p>Every extension reuses the same selector, UIA reader, model, serializer, and reporters.</p></header>
-        <main><div class="grid six">
-        <article><h3>Focus Path Recorder</h3><p>Flag loops, jumps, unnamed targets, and offscreen focus.</p></article>
-        <article><h3>PR automation</h3><p>Post accessibility diffs automatically on each change.</p></article>
-        <article><h3>Baseline catalog</h3><p>Approved component snapshots across release branches.</p></article>
-        <article><h3>Interactive explorer</h3><p>Visual before/after drill-down and filters.</p></article>
-        <article><h3>Rule plug-ins</h3><p>Component-specific semantic policies.</p></article>
-        <article><h3>Cross-build matrix</h3><p>Compare architectures, versions, branches, and Windows releases.</p></article>
-      </div><p class="center-accent">Next milestone: a repeatable RNW CI scenario.</p></main>
+        <header><span>Top next steps</span><h1>Turn the prototype into an everyday RNW quality gate.</h1><p>These three extensions offer the clearest engineering and customer impact.</p></header>
+        <main><div class="grid three next-steps">
+        <article><h3>1 · Automatic PR checks</h3><p>Run approved Gallery and RNTester scenarios in CI, post the diff on the pull request, and block new regressions.</p></article>
+        <article><h3>2 · Keyboard focus recorder</h3><p>Record focus movement and flag loops, unexpected jumps, missing labels, or focus landing on hidden content.</p></article>
+        <article><h3>3 · Visual diff explorer</h3><p>Highlight changes in a browser and manage approved baselines without reading raw JSON.</p></article>
+      </div><p class="center-accent">First milestone: automate one repeatable RNW Gallery scenario in CI.</p></main>
         <audio class="slide-narration" preload="metadata" src="assets/narration/12.mp3"></audio>
         <footer>FHL 2026 · Accessibility Tree Snapshot & Diff <b>12</b></footer>
       </section>
