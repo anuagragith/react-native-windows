@@ -17,6 +17,7 @@
 #include <PackagerConnection.h>
 #include <QuirkSettings.h>
 #include <Shared/DevServerHelper.h>
+#include <ShlObj.h>
 #include <Threading/MessageDispatchQueue.h>
 #include <Threading/MessageQueueThreadFactory.h>
 #include <TurboModuleManager.h>
@@ -462,7 +463,15 @@ std::wstring GetPreparedScriptStoreDirectory() noexcept {
       if (appFolderName.empty()) {
         return {};
       }
-      directory = std::wstring{winrt::Windows::Storage::UserDataPaths::GetDefault().LocalAppData()};
+      // UserDataPaths requires Windows 10 1903, so use the shell API which is also available on 1809.
+      PWSTR localAppData = nullptr;
+      HRESULT hr = SHGetKnownFolderPath(FOLDERID_LocalAppData, KF_FLAG_DEFAULT, nullptr, &localAppData);
+      if (FAILED(hr) || !localAppData) {
+        CoTaskMemFree(localAppData);
+        return {};
+      }
+      directory = localAppData;
+      CoTaskMemFree(localAppData);
       directory /= L"Microsoft";
       directory /= L"ReactNative";
       directory /= L"PreparedScripts";
