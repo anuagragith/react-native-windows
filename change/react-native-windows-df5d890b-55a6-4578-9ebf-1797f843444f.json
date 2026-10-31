@@ -1,0 +1,7 @@
+{
+  "type": "prerelease",
+  "comment": "Harden HTTP redirects and move the Hermes bytecode cache out of the temp folder",
+  "packageName": "react-native-windows",
+  "email": "anuagra@microsoft.com",
+  "dependentChangeType": "patch"
+}
