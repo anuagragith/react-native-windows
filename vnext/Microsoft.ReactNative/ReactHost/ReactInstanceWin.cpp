@@ -28,11 +28,13 @@
 #include <react/renderer/runtimescheduler/RuntimeScheduler.h>
 #include <react/renderer/runtimescheduler/RuntimeSchedulerCallInvoker.h>
 #include <winrt/Windows.Storage.h>
+#include <filesystem>
 #include <tuple>
 #include "BaseScriptStoreImpl.h"
 #include "CrashManager.h"
 #include "DevMenu.h"
 #include "DynamicWriter.h"
+#include "Hasher.h"
 #include "HermesRuntimeHolder.h"
 #include "IReactContext.h"
 #include "IReactDispatcher.h"
@@ -412,13 +414,82 @@ Mso::DispatchQueueSettings CreateDispatchQueueSettings(
   return queueSettings;
 }
 
-std::unique_ptr<facebook::jsi::PreparedScriptStore> CreatePreparedScriptStore() noexcept {
-  std::unique_ptr<facebook::jsi::PreparedScriptStore> preparedScriptStore = nullptr;
-  wchar_t tempPath[MAX_PATH];
-  if (GetTempPathW(static_cast<DWORD>(std::size(tempPath)), tempPath)) {
-    preparedScriptStore = std::make_unique<facebook::react::BasePreparedScriptStoreImpl>(winrt::to_string(tempPath));
+// Unpackaged apps share %LOCALAPPDATA%, so give each executable its own cache folder.
+std::wstring GetUnpackagedAppCacheFolderName() noexcept {
+  std::wstring exePath(MAX_PATH, L'\0');
+  for (;;) {
+    DWORD length = GetModuleFileNameW(nullptr, exePath.data(), static_cast<DWORD>(exePath.size()));
+    if (length == 0) {
+      return {};
+    }
+    if (length < exePath.size()) {
+      exePath.resize(length);
+      break;
+    }
+    if (exePath.size() >= 32768) {
+      return {};
+    }
+    exePath.resize(exePath.size() * 2);
   }
-  return preparedScriptStore;
+
+  CharLowerBuffW(exePath.data(), static_cast<DWORD>(exePath.size()));
+  auto hash = Microsoft::ReactNative::GetSHA256Hash(exePath.data(), exePath.size() * sizeof(wchar_t));
+  if (!hash || hash->size() < 8) {
+    return {};
+  }
+
+  static constexpr wchar_t hexDigits[] = L"0123456789abcdef";
+  std::wstring name;
+  for (size_t i = 0; i < 8; ++i) {
+    name += hexDigits[(*hash)[i] >> 4];
+    name += hexDigits[(*hash)[i] & 0xF];
+  }
+  return name;
+}
+
+// The Hermes prepared script (bytecode) cache must live in an app-private folder. Cached bytecode is executed
+// without re-compiling the source, so a folder shared with other apps or users (such as %TEMP%) would let them
+// replace the code the app runs, and would let different apps overwrite each other's cache entries.
+std::wstring GetPreparedScriptStoreDirectory() noexcept {
+  try {
+    std::filesystem::path directory;
+    if (Microsoft::ReactNative::HasPackageIdentity()) {
+      directory = std::wstring{winrt::Windows::Storage::ApplicationData::Current().LocalCacheFolder().Path()};
+      directory /= L"ReactNative";
+      directory /= L"PreparedScripts";
+    } else {
+      std::wstring appFolderName = GetUnpackagedAppCacheFolderName();
+      if (appFolderName.empty()) {
+        return {};
+      }
+      directory = std::wstring{winrt::Windows::Storage::UserDataPaths::GetDefault().LocalAppData()};
+      directory /= L"Microsoft";
+      directory /= L"ReactNative";
+      directory /= L"PreparedScripts";
+      directory /= appFolderName;
+    }
+
+    std::error_code ec;
+    std::filesystem::create_directories(directory, ec);
+    if (ec || !std::filesystem::is_directory(directory, ec)) {
+      return {};
+    }
+
+    std::wstring result = directory.wstring();
+    result += std::filesystem::path::preferred_separator;
+    return result;
+  } catch (...) {
+    return {};
+  }
+}
+
+std::unique_ptr<facebook::jsi::PreparedScriptStore> CreatePreparedScriptStore() noexcept {
+  std::wstring directory = GetPreparedScriptStoreDirectory();
+  if (directory.empty()) {
+    // Run without a bytecode cache rather than falling back to a shared folder.
+    return nullptr;
+  }
+  return std::make_unique<facebook::react::BasePreparedScriptStoreImpl>(winrt::to_string(directory));
 }
 
 typedef HRESULT(__stdcall *SetThreadDescriptionFn)(HANDLE, PCWSTR);
